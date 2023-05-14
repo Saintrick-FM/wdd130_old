@@ -8,7 +8,9 @@ nav a,
 main section{
     text-align: center; 
 }
-
+#hero-img{
+    width: 100%;
+}
 #background {
 height: 725px;
 background-color: #FBF4F4;
@@ -28,9 +30,7 @@ text-decoration: none;
 text-align: center;
 /*padding: 35px;*/
 }
-#hero-msg h1, #hero-msg h4{
-    text-align: center;
-}
+
 .button-box{
     text-align: center;
 }
