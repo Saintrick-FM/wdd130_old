@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Editeur de texte</title>
+    <style>
+      #editor {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        background-color: #f2f2f2;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="editor" contenteditable="true">
+      Bonjour, je suis un éditeur de texte.
+    </div>
+    <button onclick="boldText()">Gras</button>
+    <button onclick="italicText()">Italique</button>
+    <button onclick="highlightText()">Surligner</button>
+    <script>
+      const regex = /#(\w+)/g;
+      const regexStrong = /<strong>(.*?)<\/strong>/g;
+          const editor = document.getElementById('editor');
+          editor.addEventListener('input', function () {
+            const r = [2, 32, 3];
+            const content = editor.innerHTML;
+            const elementCustom = content.match(regex).map(match => match.slice(1));
+            if (elementCustom.length > 1) {
+                const elementReplace = elementCustom.filter((data) => !data.match(regexStrong));
+               
+                elementReplace.forEach((data) => { editor.innerHTML = editor.innerHTML.replace(`#${data}`, `#<strong>${data}</strong>`);
+                editor.focus();
+                if (document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
+                { range = document.createRange();//Create a range (a range is a like the selection but invisible)
+                range.selectNodeContents(editor);
+                collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+                selection = window.getSelection();
+                selection.removeAllRanges();
+                console.dir(editor) ;
+            })
+            }
+        });
+        function boldText() { 
+            document.execCommand("bold", false, null);
+     } 
+        function italicText() { 
+            document.execCommand("italic", false, null); 
+        } 
+        function highlightText() { 
+            document.execCommand("hiliteColor", false, "yellow"); 
+        }
+    </script>
+  </body>
+</html>
